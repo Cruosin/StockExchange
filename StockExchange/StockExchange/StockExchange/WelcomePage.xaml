@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StockExchange.WelcomePage">
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Home" x:Name="HomePage">
+        <StackLayout>
+            <Entry 
+                Placeholder="Select Stock Course"
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="Center"
+                x:Name="HomeStock"
+                Completed="HomeStock_Completed"
+            />
+            <Button
+                x:Name="StockSearch"
+                VerticalOptions="StartAndExpand"
+                HorizontalOptions="Center"
+                Text="Search"
+                Clicked="StockSearchButton_Clicked"
+            />
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Title="Stock Course" x:Name="StockCoursePage">
+        <StackLayout>
+            <StackLayout 
+                x:Name="GeneralStockInfoLayout"
+                Orientation="Horizontal"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Label
+                    x:Name="StockName"
+                    Text="Stock Name"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    HorizontalOptions="StartAndExpand"/>
+                <Label 
+                    x:Name="StockValue"
+                    Text="Value" FontSize="Large" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="CenterAndExpand"/>
+                <Label 
+                    x:Name="Percentage"
+                    Text="%" FontSize="Large"
+                    VerticalOptions="Center"
+                    HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                >
+                <Label
+                    Text="Highest today:"
+                    FontSize="Large"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="StartAndExpand"
+                    />
+                <Label
+                Text="Daily High"
+                FontSize="Large"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="EndAndExpand"
+                x:Name="DailyHigh"
+                />
+            </StackLayout>
+            <StackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                >
+                <Label
+                    Text="Lowest today:"
+                    FontSize="Large"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="StartAndExpand"
+                    />
+                <Label
+                Text="Daily Low"
+                FontSize="Large"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="EndAndExpand"
+                x:Name="DailyLow"
+                />
+            </StackLayout>
+            <StackLayout 
+                x:Name="NewStockSearchLayout"
+                Orientation="Vertical"
+                >
+                <Entry
+                    Placeholder="Search New Stock"
+                    x:Name="NewStock"
+                    HorizontalOptions="FillAndExpand"
+                    Completed="NewStock_Completed"
+                    />
+                <Button
+                    x:Name="NewStockSearch"
+                    Clicked="NewStockSearch_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Search"
+                    />
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>

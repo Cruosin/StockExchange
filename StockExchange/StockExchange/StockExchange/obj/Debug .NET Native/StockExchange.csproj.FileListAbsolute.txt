@@ -1,0 +1,17 @@
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\StockExchange.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\StockExchange.pdb
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Newtonsoft.Json.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Core.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Platform.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Xaml.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Newtonsoft.Json.xml
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Core.pdb
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Core.xml
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Platform.pdb
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Xaml.pdb
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\bin\Debug .NET Native\Xamarin.Forms.Xaml.xml
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\obj\Debug .NET Native\StockExchange.csproj.CoreCompileInputs.cache
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\obj\Debug .NET Native\StockExchange.App.xaml.g.cs
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\obj\Debug .NET Native\StockExchange.WelcomePage.xaml.g.cs
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\obj\Debug .NET Native\StockExchange.dll
+C:\Users\Curo\source\repos\StockExchange\StockExchange\StockExchange\obj\Debug .NET Native\StockExchange.pdb
