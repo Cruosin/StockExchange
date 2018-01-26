@@ -45,19 +45,57 @@ namespace StockExchange
         //Call Alpha Vantage API and receive data, switch page after process is complete
         private async void StockSearchButton_Clicked()
         {
-            AVApiWrapper.ApiData data = new AVApiWrapper.ApiData(await AVApiWrapper.getApiData(HomeStockEntry.Text.ToString(), AlphaVantageKey));
-            setData(data, HomeStockEntry.Text.ToString());
-            this.CurrentPage = StockContentPage;
+            //check if the user entered something into the entry
+            if (!String.IsNullOrEmpty(HomeStockEntry.Text))
+            {
+                string StockHandle = GetStockHandle(HomeStockEntry.Text);
+                if (!StockHandle.Contains("Invalid"))
+                {
+                    AVApiWrapper.ApiData data = new AVApiWrapper.ApiData(await AVApiWrapper.getApiData(StockHandle, AlphaVantageKey));
+                    setData(data, HomeStockEntry.Text.ToString());
+                    this.CurrentPage = StockContentPage;
+                }
+                //user entered a not supported company
+                else
+                {
+                    await DisplayAlert("Warning!", "The Company you are searching for is not supported in the current version." +
+                        " Please choose a different one.", "Ok");
+                }
+            }
+            //user did not enter anything, display a warning
+            else
+            {
+                await DisplayAlert("Warning!", "Please enter a company into the field.", "Ok");
+            }
         }
 
         //Call Alpha Vantage API and receive data
         private async void NewStockSearch_Clicked()
         {
-            AVApiWrapper.ApiData data = new AVApiWrapper.ApiData(await AVApiWrapper.getApiData(NewStockEntry.Text.ToString(), AlphaVantageKey));
-            setData(data, NewStockEntry.Text.ToString());
+            //check if the entry field is empty
+            if (!String.IsNullOrEmpty(HomeStockEntry.Text))
+            {
+                string StockHandle = GetStockHandle(NewStockEntry.Text);
+                if (!StockHandle.Contains("Invalid"))
+                {
+                    AVApiWrapper.ApiData data = new AVApiWrapper.ApiData(await AVApiWrapper.getApiData(StockHandle, AlphaVantageKey));
+                    setData(data, NewStockEntry.Text.ToString());
+                }
+                //user entered a not supported company
+                else
+                {
+                    await DisplayAlert("Warning!", "The Company you are searching for is not supported in the current version." +
+                        " Please choose a different one.", "Ok");
+                }
+            }
+            //user did not enter anything, display a warning
+            else
+            {
+                await DisplayAlert("Warning!", "Please enter a company into the field.", "Ok");
+            }
         }
 
-        //
+        //fill page with numbers from the API
         private void setData(AVApiWrapper.ApiData data, string entryText)
         {
             DailyHighLabel.Text = data.dailyHigh.ToString();
@@ -77,6 +115,43 @@ namespace StockExchange
         private void NewStock_Completed(object sender, EventArgs e)
         {
             NewStockSearch_Clicked();
+        }
+
+        //converts title of Companies to handles used by Stock Exchanges
+        //for this project a few(not all) companies are included
+        public static string GetStockHandle(string UserEntry)
+        {
+            string Handle = null;
+            switch (UserEntry)
+            {
+                case "Microsoft":
+                    Handle = "MSFT";
+                    break;
+                case "Apple":
+                    Handle = "AAPL";
+                    break;
+                case "Google":
+                    Handle = "GOOG";
+                    break;
+                case "Amazon":
+                    Handle = "AMZN";
+                    break;
+                case "Facebook":
+                    Handle = "FB";
+                    break;
+                case "Verizon":
+                    Handle = "VZ";
+                    break;
+                case "Disney":
+                    Handle = "DIS";
+                    break;
+                    //user entry false, throw error
+                default:
+                    Handle = "Invalid";
+                    break;
+            }
+
+            return Handle;
         }
     }
 }

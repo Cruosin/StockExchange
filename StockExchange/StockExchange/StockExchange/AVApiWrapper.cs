@@ -98,14 +98,14 @@ namespace StockExchange
         }
 
         //sets data received from the API and returns it to WelcomePage to update the UI
-        public static async Task<ApiData> getApiData(string Company, string ApiKey)
+        public static async Task<ApiData> getApiData(string StockHandle, string ApiKey)
         {
             //get dates for the JSON data
             string today = GetDate().ToString("yyyy-MM-dd");
             string yesterday = GetDate().AddDays(-1).ToString("yyyy-MM-dd");
             string yesterdayClosing;
 
-            JObject dailyData = await getDailyJSONData(Company, ApiKey);
+            JObject dailyData = await getDailyJSONData(StockHandle, ApiKey);
 
             ApiData datas = new ApiData();
             //convert relevant JSON data to strings
@@ -113,13 +113,12 @@ namespace StockExchange
             datas.dailyHigh = dailyData["Time Series (Daily)"][today]["2. high"].ToString();
             datas.dailyLow = dailyData["Time Series (Daily)"][today]["3. low"].ToString();
             yesterdayClosing = dailyData["Time Series (Daily)"][yesterday]["4. close"].ToString();
-            //check if course is rising and add %
-            if(!String.IsNullOrEmpty(datas.closingCourse) && !String.IsNullOrEmpty(yesterdayClosing))
-            {
-                datas.isHigher = courseIsRising(datas.closingCourse, yesterdayClosing);
-                datas.percentageDifference = coursePercentageDeviance(datas.closingCourse, yesterdayClosing);
-            }
-            //reformat strings to a better format, usually two decimals and a currency sign
+
+            //check if course is rising and add % difference from yesterdays course
+            datas.isHigher = courseIsRising(datas.closingCourse, yesterdayClosing);
+            datas.percentageDifference = coursePercentageDeviance(datas.closingCourse, yesterdayClosing);
+
+            //reformat strings to a better format, usually two decimals and a currency sign in this case $
             datas.closingCourse = ReformatStockValueString(datas.closingCourse);
             datas.dailyHigh = ReformatStockValueString(datas.dailyHigh);
             datas.dailyLow = ReformatStockValueString(datas.dailyLow);
@@ -129,9 +128,9 @@ namespace StockExchange
         }
 
         //returns JSON data for further formatting
-        public static async Task<JObject> getDailyJSONData(string Company, string ApiKey)
+        public static async Task<JObject> getDailyJSONData(string StockHandle, string ApiKey)
         {
-            string HttpRequest = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + GetStockHandle(Company) + "&apikey=" + ApiKey;
+            string HttpRequest = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + StockHandle + "&apikey=" + ApiKey;
             return JsonConvert.DeserializeObject<JObject>(await MakeRequest(HttpRequest));
         }
 
@@ -179,39 +178,6 @@ namespace StockExchange
                 percentageDifference = data.percentageDifference;
                 isHigher = data.isHigher;
             }
-        }
-
-        //converts title of Companies to handles used by Stock Exchanges
-        //for this project a few(not all) companies are included
-        public static string GetStockHandle(string UserEntry)
-        {
-            string Handle = null;
-            switch (UserEntry)
-            {
-                case "Microsoft":
-                    Handle = "MSFT";
-                    break;
-                case "Apple":
-                    Handle = "AAPL";
-                    break;
-                case "Google":
-                    Handle = "GOOG";
-                    break;
-                case "Amazon":
-                    Handle = "AMZN";
-                    break;
-                case "Facebook":
-                    Handle = "FB";
-                    break;
-                case "Verizon":
-                    Handle = "VZ";
-                    break;
-                case "Disney":
-                    Handle = "DIS";
-                    break;
-            }
-
-            return Handle;
         }
     }
 }
